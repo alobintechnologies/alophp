@@ -1,5 +1,5 @@
 <?php
-namespace Frameworkless\Controllers;
+namespace AloPHP\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 

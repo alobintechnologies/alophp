@@ -1,5 +1,5 @@
 <?php
-namespace Frameworkless\Controllers;
+namespace AloPHP\Controllers;
 
 use PDO;
 use Symfony\Component\HttpFoundation\JsonResponse;
