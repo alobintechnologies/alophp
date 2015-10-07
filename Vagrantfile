@@ -4,7 +4,7 @@ Vagrant.configure(2) do |config|
     config.vm.network "forwarded_port", guest: 3306, host: 3307
 
     config.vm.synced_folder ".", "/vagrant", disabled: true
-    config.vm.synced_folder ".", "/opt/frameworkless"
+    config.vm.synced_folder ".", "/opt/alophp"
 
     config.ssh.insert_key = true
 
