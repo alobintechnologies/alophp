@@ -46,11 +46,35 @@ $bugsnag->setUser(array(
 	echo '</div>';
 }
 
+function getFileLines($start = 0, $length = null, $filePath)
+{
+	$fileContents = file_get_contents($filePath);
+
+	if (null !== ($contents = $fileContents)) {
+		$lines = explode("\n", $contents);
+		// Get a subset of lines from $start to $end
+		if ($length !== null) {
+			$start  = (int) $start;
+			$length = (int) $length;
+			if ($start < 0) {
+				$start = 0;
+			}
+			if ($length <= 0) {
+				throw new InvalidArgumentException(
+					"\$length($length) cannot be lower or equal to 0"
+				);
+			}
+			$lines = array_slice($lines, $start, $length, true);
+		}
+		return $lines;
+	}
+}
+
 function exceptionHandler($exception) {
 
     // these are our templates
-    $traceline = "#%s %s(%s): %s(%s)";
-    $msg = "PHP Fatal error:  Uncaught exception '%s' with message '%s' in %s:%s\nStack trace:\n%s\n  thrown in %s on line %s";
+    $traceline = "#%s %s(%s): %s(%s)<br/> <pre class='code-block linenums'>%s</pre>";
+    $msg = "PHP Fatal error:  Uncaught exception '%s' with message '%s' in %s:%s<br/>Stack trace:<br/>%s<br/>  thrown in %s on line %s";
 
     // alter your trace as you please, here
     $trace = $exception->getTrace();
@@ -63,13 +87,25 @@ function exceptionHandler($exception) {
     // build your tracelines
     $result = array();
     foreach ($trace as $key => $stackPoint) {
+		$line = $stackPoint['line'];
+		$source = "";
+		if($line !== null) {			
+			$range = getFileLines($line - 8, 10, $stackPoint['file']);
+
+			if($range) {
+				$range = array_map(function($line) { return empty($line) ? ' ' : $line; }, $range);
+				$start = key($range) + 1;
+				$source = join("\n", $range);
+			}
+		}
         $result[] = sprintf(
             $traceline,
             $key,
             $stackPoint['file'],
             $stackPoint['line'],
             $stackPoint['function'],
-            implode(', ', $stackPoint['args'])
+            implode(', ', $stackPoint['args']),			
+			$source
         );
     }
     // trace always ends with {main}
@@ -82,7 +118,7 @@ function exceptionHandler($exception) {
         $exception->getMessage(),
         $exception->getFile(),
         $exception->getLine(),
-        implode("\n", $result),
+        implode("<br/>", $result),
         $exception->getFile(),
         $exception->getLine()
     );
@@ -96,7 +132,7 @@ function exceptionHandler($exception) {
  */
 //set_error_handler(array($bugsnag, "errorHandler"));
 //set_exception_handler(array($bugsnag, "exceptionHandler"));
-
+//set_error_handler();
 set_exception_handler('exceptionHandler');
 
 
