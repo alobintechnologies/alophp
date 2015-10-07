@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Frameworkless
 Blog post: https://medium.com/@mmeyer/frameworkless-or-how-i-use-php-bf0b119536ad
 
@@ -74,3 +75,7 @@ public function get()
 
 ## Contributing
 File an issue, or even better, submit a pull request. I'll review it asap. You can also email me at: mcm1792 at rit.edu
+=======
+# alophp
+This is a framework for php with composer packages 
+>>>>>>> 2c4511d0f5a665245cc7f6c1cc88f76fe2650a2a
