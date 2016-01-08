@@ -2,10 +2,10 @@
 
 return [
     // Hello
-    ['GET', '/', ['Frameworkless\Controllers\HelloController', 'get']],
-    ['GET', '/home', ['Frameworkless\Controllers\HelloController', 'home']],
+    ['GET', '/', ['AloPHP\Controllers\HelloController', 'get']],
+    ['GET', '/home', ['AloPHP\Controllers\HelloController', 'home']],
     // Todos
-    ['GET', '/todos', ['Frameworkless\Controllers\TodosController', 'get']],
-    ['POST', '/todos', ['Frameworkless\Controllers\TodosController', 'post']],
-    ['GET', '/todos/{id:\d+}', ['Frameworkless\Controllers\TodosController', 'show']],
+    ['GET', '/todos', ['AloPHP\Controllers\TodosController', 'get']],
+    ['POST', '/todos', ['AloPHP\Controllers\TodosController', 'post']],
+    ['GET', '/todos/{id:\d+}', ['AloPHP\Controllers\TodosController', 'show']],
 ];

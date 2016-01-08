@@ -7,17 +7,16 @@
         "symfony/http-foundation": "^2.7",
         "filp/whoops": "^1.1",
         "vlucas/phpdotenv": "^2.0",
-        "twig/twig": "^1.22"
+        "twig/twig": "^1.22",
+        "robmorgan/phinx": "^0.4.6"
     },
     "autoload": {
-	"classmap": [
-	    "library"
-	],
+      	"classmap": [
+      	    "library",
+            "packages"
+      	],
         "psr-4": {
-            "Frameworkless\\": "src/"
+            "AloPHP\\": "src/"
         }
-    },
-    "require-dev": {
-        "bugsnag/bugsnag": "2.*"
     }
 }
