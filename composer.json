@@ -8,7 +8,11 @@
         "filp/whoops": "^1.1",
         "vlucas/phpdotenv": "^2.0",
         "twig/twig": "^1.22",
-        "robmorgan/phinx": "^0.4.6"
+        "robmorgan/phinx": "^0.4.6",
+        "monolog/monolog": "^1.17"
+    },
+    "require-dev": {
+        "panique/php-sass": "1.0"
     },
     "autoload": {
       	"classmap": [
@@ -16,7 +20,7 @@
             "packages"
       	],
         "psr-4": {
-            "AloPHP\\": "src/"
+            "App\\": "src/"
         }
     }
 }

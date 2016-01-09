@@ -1,5 +1,8 @@
 <?php
+
+namespace App\Providers;
+
 interface IRegisterServiceProvider
 {
-  void register();
+  function register($app);
 }

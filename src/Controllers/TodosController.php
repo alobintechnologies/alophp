@@ -1,12 +1,12 @@
 <?php
-namespace AloPHP\Controllers;
+namespace App\Controllers;
 
 use PDO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TodosController
+class TodosController extends BaseController
 {
     /**
      * @var PDO
@@ -22,7 +22,7 @@ class TodosController
     {
         $handle = $this->pdo->prepare('SELECT * FROM todos');
         $handle->execute();
-        return new JsonResponse($handle->fetchAll(PDO::FETCH_ASSOC));
+        return $this->jsonResult($handle->fetchAll(PDO::FETCH_ASSOC));
     }
 
     public function show($args)
@@ -33,7 +33,7 @@ class TodosController
         if($handle->rowCount() === 0) {
             return new Response('Todo not found', Response::HTTP_NOT_FOUND);
         }
-        return new JsonResponse($handle->fetch(PDO::FETCH_ASSOC));
+        return $this->jsonResult($handle->fetch(PDO::FETCH_ASSOC));
     }
 
     public function post()
